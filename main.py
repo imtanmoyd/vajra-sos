@@ -11,7 +11,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # 🚀 Step 2: Initialize Google Gemini API
-GEMINI_API_KEY = "AIzaSyA3H8pAXoXSG9xRoEYi2tiR2F5NnEwrtW0" # custom key
+GEMINI_API_KEY = "Your_API" # custom key
 genai.configure(api_key=GEMINI_API_KEY)
 
 # 🚀 Step 3: Fetch Farmers from Firebase
