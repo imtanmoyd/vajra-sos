@@ -54,7 +54,7 @@ Collection: `farmers`
 ```json
 {
     "name": "Farmer A",
-    "phone": "+918622970999"
+    "phone": "+91XXXXXXXXXX"
 }
 ```
 
@@ -101,9 +101,9 @@ This project is licensed under **MIT License**.
 ---
 
 ## 📧 Contact  
-👨‍💻 **Created by:** Tanmoy  
-📩 Email: your-email@example.com  
-🌐 GitHub: [your-github-link](https://github.com/your-username)  
+👨‍💻 **Created by:** Tanmoy Das
+📩 Email: imtanmoyd@gmail.com 
+🌐 GitHub: imtanmoyd(https://github.com/imtanmoyd)  
 ```
 
 ---
