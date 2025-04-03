@@ -26,7 +26,7 @@ An **AI-powered emergency alert system** for farmers. It fetches weather alerts 
 
 ### **1️⃣ Clone the Repository**  
 ```sh
-git clone https://github.com/your-username/VajraSOS.git  
+git clone https://github.com/imtanmoyd/VajraSOS.git  
 cd VajraSOS  
 ```
 
