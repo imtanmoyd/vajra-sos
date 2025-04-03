@@ -71,12 +71,12 @@ TWILIO_PHONE_NUMBER = "+your_twilio_number"
 
 ### **Run the script to send alerts**  
 ```sh
-python send_sms.py
+python main.py
 ```
 
 ### **Expected Output**  
 ```
-✅ SMS sent to +918622970999 (Message SID: XXXXXXXXXXXXXXXXXXX)
+✅ SMS sent to +91XXXXXXXXXX (Message SID: XXXXXXXXXXXXXXXXXXX)
 ```
 
 ---
