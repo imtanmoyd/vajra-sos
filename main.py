@@ -6,12 +6,12 @@ import time
 import google.generativeai as genai
 
 # 🚀 Step 1: Initialize Firebase
-cred = credentials.Certificate("firebase-key.json")  # Ensure correct path
+cred = credentials.Certificate("vajrasos-firebase-adminsdk-fbsvc-b5ba9d8a64.json")  # Ensure correct path
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # 🚀 Step 2: Initialize Google Gemini API
-GEMINI_API_KEY = "Your_API" # custom key
+GEMINI_API_KEY = "API_KEY" # Custom key
 genai.configure(api_key=GEMINI_API_KEY)
 
 # 🚀 Step 3: Fetch Farmers from Firebase
@@ -90,3 +90,56 @@ print("🌾 VajraSOS is Running... Monitoring Weather for Alerts")
 while True:
     schedule.run_pending()
     time.sleep(60)  # Wait 1 minute before checking again
+
+
+# 🚀 Step 9: Fast2SMS API Configuration
+FAST2SMS_API_KEY = "API_KEY"  # 🔥 Replace with your API Key
+
+# 🚀 Step 10: Fetch Farmers' Phone Numbers from Firestore
+def get_farmer_phone_numbers():
+    try:
+        farmers_ref = db.collection("farmers")  # Firestore collection
+        docs = farmers_ref.stream()
+        phone_numbers = [doc.to_dict().get("phone") for doc in docs if doc.to_dict().get("phone")]
+        return phone_numbers
+    except Exception as e:
+        print(f"⚠️ Error Fetching Numbers: {e}")
+        return []
+
+# 🚀 Step 11: Send Bulk SMS using Fast2SMS API
+def send_bulk_sms(phone_numbers, message_text):
+    API_URL = "https://www.fast2sms.com/dev/bulkV2"
+
+    headers = {
+        "authorization": FAST2SMS_API_KEY,
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "route": "q",
+        "message": message_text,
+        "language": "english",
+        "flash": 0,
+        "numbers": ",".join(phone_numbers)  # Convert list to comma-separated string
+    }
+
+    response = requests.post(API_URL, json=payload, headers=headers)
+
+    if response.status_code == 200:
+        result = response.json()
+        if result.get("return"):
+            print(f"✅ SMS Sent Successfully to {len(phone_numbers)} numbers!")
+        else:
+            print(f"🔥 Failed to send SMS: {result.get('message', 'Unknown error')}")
+    else:
+        print(f"🔥 API Error: {response.text}")
+
+# 🚀 Step 12: Main Execution
+if __name__ == "__main__":
+    farmer_numbers = get_farmer_phone_numbers()  # Fetch numbers from Firebase
+    message = "⚠️ VajraSOS Alert! Heavy Rain Expected. Secure your crops!"
+
+    if farmer_numbers:
+        send_bulk_sms(farmer_numbers, message)  # Send SMS to all numbers at once
+    else:
+        print("⚠️ No farmers found in database!")
