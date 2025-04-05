@@ -6,8 +6,8 @@ import google.generativeai as genai
 from twilio.rest import Client
 
 # Twilio Configuration (Replace with real values or load from environment variables)
-TWILIO_ACCOUNT_SID = 'AC2bd06994d0dd4df741783f8f4b4ea05d'
-TWILIO_AUTH_TOKEN = '405c5a6de6962e3a207a1cb759813934'
+TWILIO_ACCOUNT_SID = 'ACCOUNT_SID'
+TWILIO_AUTH_TOKEN = 'AUTH_TOKEN'
 TWILIO_PHONE_NUMBER = '+17177485326'  # Your Twilio number
 
 
@@ -112,17 +112,22 @@ def check_alerts(weather_data):
 #         return None
 def send_sms_notification(to_phone, message):
     try:
+        if not message or not message.strip():
+            print(f"⚠️ Skipping SMS to {to_phone}: Message is empty.")
+            return None
+
         client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
         sms = client.messages.create(
-            body=message,
+            body=message.strip(),
             from_=TWILIO_PHONE_NUMBER,
-            to=to_phone  # Include country code like +91
+            to=to_phone
         )
         print(f"📩 SMS sent to {to_phone}. SID: {sms.sid}")
         return sms.sid
     except Exception as e:
         print(f"🔥 Error sending SMS to {to_phone}: {e}")
         return None
+
 
 
 # 🚀 Step 7: Main Monitoring Function
@@ -153,12 +158,17 @@ def monitor_weather(db, gemini_model):
                 print(f"🌤️ Weather data: {weather_data[:100]}...")  # Truncate for display
                 alert = check_alerts(weather_data)
                 
-                if alert:
-                    print(f"⚠️ ALERT: {alert}")
-                    send_sms_notification(phone_number, alert)
-                else:
-                    send_sms_notification(phone_number, alert)
-                    print("✅ No alerts for this location")
+                message = alert if alert and alert.strip() else f"✅ Weather is stable at your location. No alerts currently."
+
+                send_sms_notification(farmer['phone'], message)
+
+                # if alert:
+                #     print(f"⚠️ ALERT: {alert}")
+                #     send_sms_notification(farmer['phone'], alert)
+                # else:
+                #     print("✅ No alerts for this location")
+                #     send_sms_notification(farmer['phone'], alert)
+
             else:
                 print("⚠️ Could not retrieve weather data")
                 
@@ -170,7 +180,7 @@ def monitor_weather(db, gemini_model):
 # 🚀 Main Execution
 def main():
     # Configuration
-    GEMINI_API_KEY = "AIzaSyA3H8pAXoXSG9xRoEYi2tiR2F5NnEwrtW0"  # Replace with your actual API key
+    GEMINI_API_KEY = "YOUR_GEMINI_API"  # Replace with your actual API key
     
     try:
         # Initialize services
