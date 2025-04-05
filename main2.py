@@ -8,7 +8,7 @@ from twilio.rest import Client
 # Twilio Configuration (Replace with real values or load from environment variables)
 TWILIO_ACCOUNT_SID = 'ACCOUNT_SID'
 TWILIO_AUTH_TOKEN = 'AUTH_TOKEN'
-TWILIO_PHONE_NUMBER = '+17177485326'  # Your Twilio number
+TWILIO_PHONE_NUMBER = 'YOUR_TWILIO_NUMVER'  # Your Twilio number
 
 
 # 🚀 Step 1: Initialize Firebase
