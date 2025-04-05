@@ -3,6 +3,13 @@ from firebase_admin import credentials, firestore, messaging
 import schedule
 import time
 import google.generativeai as genai
+from twilio.rest import Client
+
+# Twilio Configuration (Replace with real values or load from environment variables)
+TWILIO_ACCOUNT_SID = 'AC2bd06994d0dd4df741783f8f4b4ea05d'
+TWILIO_AUTH_TOKEN = '405c5a6de6962e3a207a1cb759813934'
+TWILIO_PHONE_NUMBER = '+17177485326'  # Your Twilio number
+
 
 # 🚀 Step 1: Initialize Firebase
 def initialize_firebase():
@@ -42,6 +49,7 @@ def get_farmers(db):
             required_fields = ["name", "phone", "latitude", "longitude"]
             if all(field in farmer_data for field in required_fields):
                 farmers.append(farmer_data)
+        print(farmers)
         return farmers
     except Exception as e:
         print(f"🔥 Error fetching farmers: {e}")
@@ -82,26 +90,40 @@ def check_alerts(weather_data):
             return alert_message
     return None
 
-# 🚀 Step 6: Send Notifications via Firebase Cloud Messaging
-def send_fcm_notification(phone, message):
-    try:
-        # Note: FCM topics have restrictions on format
-        # Convert phone to valid topic name by removing non-alphanumeric chars
-        topic = ''.join(c for c in phone if c.isalnum())
+# # 🚀 Step 6: Send Notifications via Firebase Cloud Messaging
+# def send_fcm_notification(phone, message):
+#     try:
+#         # Note: FCM topics have restrictions on format
+#         # Convert phone to valid topic name by removing non-alphanumeric chars
+#         topic = ''.join(c for c in phone if c.isalnum())
         
-        message = messaging.Message(
-            notification=messaging.Notification(
-                title="🌾 Farm Weather Alert",
-                body=message
-            ),
-            topic=topic
+#         message = messaging.Message(
+#             notification=messaging.Notification(
+#                 title="🌾 Farm Weather Alert",
+#                 body=message
+#             ),
+#             topic=topic
+#         )
+#         response = messaging.send(message)
+#         print(f"📤 Notification sent to {phone} (topic: {topic})")
+#         return response
+#     except Exception as e:
+#         print(f"🔥 Error sending notification: {e}")
+#         return None
+def send_sms_notification(to_phone, message):
+    try:
+        client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+        sms = client.messages.create(
+            body=message,
+            from_=TWILIO_PHONE_NUMBER,
+            to=to_phone  # Include country code like +91
         )
-        response = messaging.send(message)
-        print(f"📤 Notification sent to {phone} (topic: {topic})")
-        return response
+        print(f"📩 SMS sent to {to_phone}. SID: {sms.sid}")
+        return sms.sid
     except Exception as e:
-        print(f"🔥 Error sending notification: {e}")
+        print(f"🔥 Error sending SMS to {to_phone}: {e}")
         return None
+
 
 # 🚀 Step 7: Main Monitoring Function
 def monitor_weather(db, gemini_model):
@@ -115,6 +137,12 @@ def monitor_weather(db, gemini_model):
     for farmer in farmers:
         try:
             print(f"\n👨‍🌾 Checking weather for {farmer['name']} ({farmer['phone']})")
+            
+            # ✅ Set phone number early and ensure it has correct format
+            phone_number = farmer['phone']
+            if not phone_number.startswith('+'):
+                phone_number = '+91' + phone_number  # Adjust country code as needed
+            
             weather_data = get_weather_gemini(
                 gemini_model, 
                 farmer['latitude'], 
@@ -127,8 +155,9 @@ def monitor_weather(db, gemini_model):
                 
                 if alert:
                     print(f"⚠️ ALERT: {alert}")
-                    send_fcm_notification(farmer['phone'], alert)
+                    send_sms_notification(phone_number, alert)
                 else:
+                    send_sms_notification(phone_number, alert)
                     print("✅ No alerts for this location")
             else:
                 print("⚠️ Could not retrieve weather data")
@@ -136,10 +165,12 @@ def monitor_weather(db, gemini_model):
         except Exception as e:
             print(f"🔥 Error processing farmer {farmer['name']}: {e}")
 
+
+
 # 🚀 Main Execution
 def main():
     # Configuration
-    GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"  # Replace with your actual API key
+    GEMINI_API_KEY = "AIzaSyA3H8pAXoXSG9xRoEYi2tiR2F5NnEwrtW0"  # Replace with your actual API key
     
     try:
         # Initialize services
