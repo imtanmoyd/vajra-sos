@@ -101,6 +101,6 @@ This project is licensed under **MIT License**.
 ---
 
 ## 📧 Contact  
-👨‍💻 **Created by:** Tanmoy Das
-📩 Email: imtanmoyd@gmail.com 
-🌐 GitHub: imtanmoyd(https://github.com/imtanmoyd)  
+👨‍💻 **Created by:** Tanmoy Das and Suvojoti Howlader
+📩 Email: imtanmoyd@gmail.com, suvo122005@gmail.com
+🌐 GitHub: imtanmoyd(https://github.com/imtanmoyd), SuvoH05(https://github.com/SuvoH05)
