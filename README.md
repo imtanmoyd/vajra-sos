@@ -53,8 +53,10 @@ pip install firebase-admin twilio requests
 Collection: `farmers`  
 ```json
 {
-    "name": "Farmer A",
-    "phone": "+91XXXXXXXXXX"
+    latitude: "28.7041",
+    longitude: "77.1025",
+    name: "Farmer A",
+    phone: "+91XXXXXXXXXX"
 }
 ```
 
