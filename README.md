@@ -60,6 +60,49 @@ Collection: `farmers`
 }
 ```
 
+# 📞 Twilio Configuration Guide
+
+This guide explains how to set up and configure Twilio SMS for the **VajraSOS** project.
+
+---
+
+## 🔧 1. Create a Twilio Account
+
+- Sign up at [https://www.twilio.com/](https://www.twilio.com/)
+- Go to your **Twilio Console Dashboard**
+
+---
+
+## 🔐 2. Get Your API Credentials
+
+In your [Twilio Console](https://www.twilio.com/console), copy:
+
+- `TWILIO_ACCOUNT_SID`
+- `TWILIO_AUTH_TOKEN`
+
+Add them to your `.env` file.
+
+---
+
+## ☎️ 3. Get or Verify a Twilio Phone Number
+
+- Navigate to [Phone Numbers → Manage → Verified Caller IDs](https://www.twilio.com/console/phone-numbers/verified)
+- For trial accounts:
+  - You **must verify** the recipient phone numbers.
+  - You can only send SMS to **verified** numbers.
+
+---
+
+## 📁 4. `.env` Configuration
+
+Create a `.env` file in your project root:
+
+```env
+TWILIO_ACCOUNT_SID=ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+TWILIO_AUTH_TOKEN=your_auth_token
+TWILIO_PHONE_NUMBER=+1XXXXXXXXXX
+
+
 ### **Twilio Configuration (`config.py`)**  
 ```python
 TWILIO_SID = "your_twilio_sid"
