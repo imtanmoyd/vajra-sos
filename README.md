@@ -18,7 +18,7 @@ An **AI-powered emergency alert system** for farmers. It fetches weather alerts 
 - **Python** 🐍  
 - **Firebase Firestore** (Database)  
 - **Twilio API** (SMS Gateway)  
-- **Google Weather API (Optional)**  
+- **Google Gemini **  
 
 ---
 
