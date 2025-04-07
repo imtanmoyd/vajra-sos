@@ -128,7 +128,7 @@ TWILIO_PHONE_NUMBER = "+your_twilio_number"
 
 ### **Run the script to send alerts**  
 ```sh
-python main.py
+python VajraSOS.py
 ```
 
 ### **Expected Output**  
