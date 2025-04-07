@@ -30,18 +30,21 @@ git clone https://github.com/imtanmoyd/VajraSOS.git
 cd VajraSOS  
 ```
 
-# 📦 Project Requirements for VajraSOS 🌾
+# 🌾 VajraSOS – Project Requirements
 
-This document outlines the Python dependencies required to run the VajraSOS Weather Alert System.
+This file documents all Python dependencies required to run the VajraSOS Weather Alert System for farmers. These dependencies are listed in `requirements.txt` and should be installed in your Python environment.
 
 ---
 
-## 🛠️ Installation
+## 📥 Installation
 
-Make sure you are using **Python 3.8+**. Install all dependencies with:
+Make sure Python 3.8 or above is installed.
+
+To install all required packages, run:
 
 ```bash
 pip install -r requirements.txt
+```
 
 
 ### **3️⃣ Configure Firebase**  
