@@ -30,10 +30,22 @@ git clone https://github.com/imtanmoyd/VajraSOS.git
 cd VajraSOS  
 ```
 
-### **2️⃣ Install Dependencies**  
-```sh
-pip install firebase-admin twilio requests  
+# 🌾 VajraSOS – Project Requirements
+
+This file documents all Python dependencies required to run the VajraSOS Weather Alert System for farmers. These dependencies are listed in `requirements.txt` and should be installed in your Python environment.
+
+---
+
+## 📥 Installation
+
+Make sure Python 3.8 or above is installed.
+
+To install all required packages, run:
+
+```bash
+pip install -r requirements.txt
 ```
+
 
 ### **3️⃣ Configure Firebase**  
 - Go to [Firebase Console](https://console.firebase.google.com/)  
@@ -53,10 +65,55 @@ pip install firebase-admin twilio requests
 Collection: `farmers`  
 ```json
 {
+    "latitude": "28.7041",
+    "longitude": "77.1025",
     "name": "Farmer A",
     "phone": "+91XXXXXXXXXX"
 }
 ```
+
+# 📞 Twilio Configuration Guide
+
+This guide explains how to set up and configure Twilio SMS for the **VajraSOS** project.
+
+---
+
+## 🔧 1. Create a Twilio Account
+
+- Sign up at [https://www.twilio.com/](https://www.twilio.com/)
+- Go to your **Twilio Console Dashboard**
+
+---
+
+## 🔐 2. Get Your API Credentials
+
+In your [Twilio Console](https://www.twilio.com/console), copy:
+
+- `TWILIO_ACCOUNT_SID`
+- `TWILIO_AUTH_TOKEN`
+
+Add them to your `.env` file.
+
+---
+
+## ☎️ 3. Get or Verify a Twilio Phone Number
+
+- Navigate to [Phone Numbers → Manage → Verified Caller IDs](https://www.twilio.com/console/phone-numbers/verified)
+- For trial accounts:
+  - You **must verify** the recipient phone numbers.
+  - You can only send SMS to **verified** numbers.
+
+---
+
+## 📁 4. `.env` Configuration
+
+Create a `.env` file in your project root:
+
+```env
+TWILIO_ACCOUNT_SID=ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+TWILIO_AUTH_TOKEN=your_auth_token
+TWILIO_PHONE_NUMBER=+1XXXXXXXXXX
+
 
 ### **Twilio Configuration (`config.py`)**  
 ```python
@@ -71,7 +128,7 @@ TWILIO_PHONE_NUMBER = "+your_twilio_number"
 
 ### **Run the script to send alerts**  
 ```sh
-python main.py
+python VajraSOS.py
 ```
 
 ### **Expected Output**  
@@ -101,6 +158,5 @@ This project is licensed under **MIT License**.
 ---
 
 ## 📧 Contact  
-👨‍💻 **Created by:** Tanmoy Das and Suvojoti Howlader
-📩 Email: imtanmoyd@gmail.com, suvo122005@gmail.com
+👨‍💻 **Created by:** Tanmoy Das📩 (Email: imtanmoyd@gmail.com) and Suvojoti Howlader (Email: suvo122005@gmail.com)
 🌐 GitHub: imtanmoyd(https://github.com/imtanmoyd), SuvoH05(https://github.com/SuvoH05)
