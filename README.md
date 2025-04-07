@@ -30,10 +30,19 @@ git clone https://github.com/imtanmoyd/VajraSOS.git
 cd VajraSOS  
 ```
 
-### **2️⃣ Install Dependencies**  
-```sh
-pip install firebase-admin twilio requests  
-```
+# 📦 Project Requirements for VajraSOS 🌾
+
+This document outlines the Python dependencies required to run the VajraSOS Weather Alert System.
+
+---
+
+## 🛠️ Installation
+
+Make sure you are using **Python 3.8+**. Install all dependencies with:
+
+```bash
+pip install -r requirements.txt
+
 
 ### **3️⃣ Configure Firebase**  
 - Go to [Firebase Console](https://console.firebase.google.com/)  
