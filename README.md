@@ -1,6 +1,3 @@
-### **🚀 README.md for VajraSOS (Agriculture SMS Alert System)**  
-
-```md
 # VajraSOS 🌾⚠️  
 An **AI-powered emergency alert system** for farmers. It fetches weather alerts and sends **bulk SMS notifications** to farmers using **Firebase Firestore** and **Twilio API**.  
 
