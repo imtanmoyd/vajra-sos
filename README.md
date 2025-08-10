@@ -1,7 +1,3 @@
-Here’s a **README.md** file for your **Agriculture SOS SMS System** project. It includes setup instructions, features, usage details, and relevant links.  
-
----
-
 ### **🚀 README.md for VajraSOS (Agriculture SMS Alert System)**  
 
 ```md
